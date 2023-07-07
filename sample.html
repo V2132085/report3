@@ -1,46 +1,33 @@
-loader = new THREE.TextureLoader();
-loader.load('images/img.png', function (texture) {
-    createPoints(texture);
-    render();
-});
+let geometry = new THREE.Geometry();
+ let material = new THREE.PointsMaterial({
+     //pointsを使用する場合はMaterialのサイズで調整する
+     size:0.1,
+     vertexColors:true
+ });
 
+ let range = 1000;
 
-function createPoints(texture) {
-    let geometry = new THREE.Geometry();
-    let material = new THREE.PointsMaterial({
-        //pointsを使用する場合はMaterialのサイズで調整する
-        size: 0.2,
-        color: 0xffffff,
-        vertexColors: true,
-        map: texture,
-        transparent: true,
-    });
+ for (let i = 0; i < range; i++) {
 
-    let maxLength = 2000;
+      let pos = getPostion(
+          Math.random() * width,
+          Math.random() * height,
+          Math.random() * width
+      );
 
-    for (let i = 0; i < maxLength; i++) {
+      //頂点データを生成
+      let particle = new THREE.Vector3(pos.x,pos.y,pos.z);
 
-        let pos = getPostion(
-            Math.random() * width,
-            Math.random() * height,
-            Math.random() * width
-        );
+      //頂点色を設定
+      let color = new THREE.Color(0xffff);
+                
+      //頂点データをジオメトリに追加
+      geometry.vertices.push(particle);
 
-        //頂点データを生成
-        let particle = new THREE.Vector3(pos.x, pos.y, pos.z);
+      //頂点色をジオメトリに追加
+      geometry.colors.push(color);
 
-        //頂点色を設定
-        let color = new THREE.Color(0xffffff);
+ }
 
-        //頂点データをジオメトリに追加
-        geometry.vertices.push(particle);
-
-
-        //頂点色をジオメトリに追加
-        geometry.colors.push(color);
-
-    }
-
-    point = new THREE.Points(geometry, material);
-    scene.add(point);
-}
+point = new THREE.Points(geometry,material);
+scene.add(point);
