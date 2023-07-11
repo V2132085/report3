@@ -33,6 +33,32 @@
         const controls = new THREE.OrbitControls(camera);
         controls.autoRotate = true;
 
+        var geometry = new THREE.Geometry();
+
+        // パーティクルの座標をランダムに生成して追加
+        for (let i = 0; i < 100; i++) {
+          var vertex = new THREE.Vector3(
+          (Math.random() - 0.5) * 0.7, // X座標をランダムに生成 (範囲を狭める)
+          (Math.random() - 0.5) * 0.5, // Y座標をランダムに生成 (範囲を狭める)
+          (Math.random() - 0.5) * 0.7  // Z座標をランダムに生成 (範囲を狭める)
+          );
+               geometry.vertices.push(vertex);
+        }
+
+        // パーティクルのマテリアルの作成
+        var material = new THREE.PointsMaterial({
+          size: 0.1,
+          color: 0xffffff,
+          map: texture,
+          transparent: true,
+          alphaTest: 0.5
+        });
+
+        // パーティクルのメッシュの作成
+        var particles = new THREE.Points(geometry, material);
+
+        scene.add(particles);
+
         // helper
         //const gridHelper = new THREE.GridHelper(1000,20); // size, step
         //scene.add(gridHelper);
@@ -40,23 +66,23 @@
         //scene.add(axisHelper);
 
         // グループを作成
-        const group = new THREE.Group();
-        scene.add(group);
-        const geometry = new THREE.BoxGeometry(50, 50, 50);
+        //const group = new THREE.Group();
+        //scene.add(group);
+        //const geometry = new THREE.BoxGeometry(50, 50, 50);
         //const geometry = new THREE.BoxBufferGeometry(50, 50, 50);
-        const material = new THREE.MeshStandardMaterial();
+        //const material = new THREE.MeshStandardMaterial();
 
-        for (let i = 0; i < 1000; i++) {
-          const mesh = new THREE.Mesh(geometry, material);
-          mesh.position.x = (Math.random() - 0.5) * 2000;
-          mesh.position.y = (Math.random() - 0.5) * 2000;
-          mesh.position.z = (Math.random() - 0.5) * 2000;
-          mesh.rotation.x = Math.random() * 2 * Math.PI;
-          mesh.rotation.y = Math.random() * 2 * Math.PI;
-          mesh.rotation.z = Math.random() * 2 * Math.PI;
+        //for (let i = 0; i < 1000; i++) {
+          //const mesh = new THREE.Mesh(geometry, material);
+         // mesh.position.x = (Math.random() - 0.5) * 2000;
+         // mesh.position.y = (Math.random() - 0.5) * 2000;
+          //mesh.position.z = (Math.random() - 0.5) * 2000;
+          //mesh.rotation.x = Math.random() * 2 * Math.PI;
+          //mesh.rotation.y = Math.random() * 2 * Math.PI;
+          //mesh.rotation.z = Math.random() * 2 * Math.PI;
           // グループに格納する
           group.add(mesh);
-        }
+        //}
 
      
       　 // 光源（環境光）
