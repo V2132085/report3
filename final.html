@@ -22,7 +22,7 @@
         const scene = new THREE.Scene();
 
         // フォグを設定
-        //scene.fog = new THREE.Fog(0x000000, 50, 2000);
+        scene.fog = new THREE.Fog(0x000000, 50, 2000);
 
         // カメラを作成
         const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -55,9 +55,8 @@
         });
 
         // パーティクルのメッシュの作成
-        var particles = new THREE.Points(geometry, material);
-
-        scene.add(particles);
+        var particles = new THREE.PointCloud(geometry, material);
+        particles.add(mesh);
 
         // helper
         //const gridHelper = new THREE.GridHelper(1000,20); // size, step
@@ -101,7 +100,8 @@
         // 毎フレーム時に実行されるループイベントです
         function tick() {
           // レンダリング
-          group.rotateY(0.01);
+          //group.rotateY(0.01);
+          
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
         }
