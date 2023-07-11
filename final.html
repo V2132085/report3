@@ -34,30 +34,26 @@
         controls.autoRotate = true;
 
         var geometry = new THREE.Geometry();
-
-        // パーティクルの座標をランダムに生成して追加
-        for (let i = 0; i < 100; i++) {
-          var vertex = new THREE.Vector3(
-          (Math.random() - 0.5) * 0.7, // X座標をランダムに生成 (範囲を狭める)
-          (Math.random() - 0.5) * 0.5, // Y座標をランダムに生成 (範囲を狭める)
-          (Math.random() - 0.5) * 0.7  // Z座標をランダムに生成 (範囲を狭める)
-          );
-               geometry.vertices.push(vertex);
-        }
-
-        // パーティクルのマテリアルの作成
-        var material = new THREE.PointsMaterial({
-          size: 0.1,
-          color: 0xffffff,
-          map: texture,
-          transparent: true,
-          alphaTest: 0.5
-        });
-
-        // パーティクルのメッシュの作成
-        var particles = new THREE.PointCloud(geometry, material);
-        particles.add(mesh);
-
+　　　　var numParticles = 200000;
+　　　　for(var i = 0 ; i < numParticles ; i++) {
+ 　　　　 geometry.vertices.push(new THREE.Vector3(
+   　　　 Math.random() * 2000 - 1000,
+   　　　 Math.random() * 2000 - 1000,
+   　　　 Math.random() * 2000 - 1000));
+　　　　}
+ 
+　　　　// マテリアルを作成
+　　　　var texture =THREE.ImageUtils.loadTexture('images/particle1.png');
+　　　　var material = new THREE.ParticleBasicMaterial({
+  　　　size: 10, color: 0xff8888, blending: THREE.AdditiveBlending,
+  　　　transparent: true, depthTest: false, map: texture });
+ 
+　　　　// 物体を作成
+　　　　var mesh = new THREE.ParticleSystem(geometry, material);
+　　　　mesh.position = new THREE.Vector3(0, 0, 0);
+　　　　mesh.sortParticles = false;
+　　　　scene.add(mesh);
+　　　　
         // helper
         //const gridHelper = new THREE.GridHelper(1000,20); // size, step
         //scene.add(gridHelper);
