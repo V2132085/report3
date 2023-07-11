@@ -58,8 +58,8 @@
 
         //顔
         const sprite1 = new THREE.Sprite(material);
-        sprite1.scale.set(1,2,1);
-        sprite1.position.set(0,0,-30);
+        sprite1.scale.set(10,20,10);
+        sprite1.position.set(0,0,-300);
         scene.add(sprite1);
 
         //const sprite2 = new THREE.Sprite(material);
@@ -84,7 +84,7 @@
 
         // 毎フレーム時に実行されるループイベントです
         function update() {
-          sprite1.position.z += 0.05;
+          sprite1.position.z += 0.10;
           //sprite2.position.z -= 0.03;
           //sprite3.position.x -= 0.03;
           //sprite4.position.x += 0.03;
