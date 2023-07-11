@@ -30,7 +30,7 @@
 
 
         //フォグ
-        scene.fog = new THREE.Fog(0xffffff, 1, 2000);
+        scene.fog = new THREE.Fog(0xffffff, 50, 2000);
         
         // カメラを作成
         const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -58,8 +58,8 @@
 
         //顔
         const sprite1 = new THREE.Sprite(material);
-        sprite1.scale.set(10,20,10);
-        sprite1.position.set(0,0,-300);
+        sprite1.scale.set(5,10,5);
+        sprite1.position.set(0,0,-100);
         scene.add(sprite1);
 
         //const sprite2 = new THREE.Sprite(material);
